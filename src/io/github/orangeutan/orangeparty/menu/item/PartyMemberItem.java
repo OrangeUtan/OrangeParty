@@ -1,7 +1,8 @@
-package io.github.orangeutan.orangeparty.menu;
+package io.github.orangeutan.orangeparty.menu.item;
 
 import io.github.orangeutan.orangeitemmenu.items.NavigateItem;
 import io.github.orangeutan.orangeitemmenu.menus.IItemMenu;
+import io.github.orangeutan.orangeparty.menu.PartyMemberMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;

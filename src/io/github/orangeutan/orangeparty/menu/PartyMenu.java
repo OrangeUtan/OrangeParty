@@ -3,6 +3,7 @@ package io.github.orangeutan.orangeparty.menu;
 import io.github.orangeutan.orangeitemmenu.items.CloseItem;
 import io.github.orangeutan.orangeitemmenu.menus.StaticMenu;
 import io.github.orangeutan.orangeparty.OrangeParty;
+import io.github.orangeutan.orangeparty.menu.item.PartyMemberItem;
 import io.github.orangeutan.orangeparty.party.PartyManager;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
