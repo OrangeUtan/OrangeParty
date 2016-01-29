@@ -37,7 +37,7 @@ public class LeavePartyCommand implements IPartyCommand {
         Player executor = Bukkit.getPlayer(mExecutor);
 
         // Executor has to have the Permission to execute this Command
-        if (!executor.hasPermission(OrangeParty.PERM_CREATE_PARTY)) {
+        if (!executor.hasPermission(OrangeParty.PERM_LEAVE_PARTY)) {
             Utils.sendJsonMsg(executor, ERROR_YOU_CANT_USE_THIS_COMMAND);
             return false;
         }
