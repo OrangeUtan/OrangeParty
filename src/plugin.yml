@@ -20,14 +20,14 @@ permissions:
       orange-party.leave: true
       orange-party.accept: true
   orange-party.create:
-    default: op
+    default: true
   orange-party.teleport:
     default: op
   orange-party.kick:
-    default: op
+    default: true
   orange-party.invite:
-    default: op
+    default: true
   orange-party.leave:
-    default: op
+    default: true
   orange-party.accept:
-    default: op
+    default: true

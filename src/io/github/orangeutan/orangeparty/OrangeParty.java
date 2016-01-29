@@ -2,6 +2,7 @@ package io.github.orangeutan.orangeparty;
 
 import io.github.orangeutan.orangeitemmenu.MenuListener;
 import io.github.orangeutan.orangeparty.executor.PartyExecutor;
+import io.github.orangeutan.orangeparty.listener.PartyListener;
 import io.github.orangeutan.orangeparty.party.IPartyManager;
 import io.github.orangeutan.orangeparty.party.PartyManager;
 import org.bukkit.plugin.ServicePriority;
@@ -28,21 +29,20 @@ public class OrangeParty extends JavaPlugin {
     public void onEnable() {
         super.onEnable();
 
-        MenuListener.getInstance().register(this);
+        setUpItemMenuSupport();
 
         new PartyExecutor(this);
-
-        mPartyManager = new PartyManager();
-
-
-        getServer().getServicesManager().register(IPartyManager.class, mPartyManager, this, ServicePriority.Normal);
-
-        new PartyExecutor(this);
+        new PartyListener(this);
     }
 
     @Override
     public void onDisable() {
         super.onDisable();
+    }
+
+    private void setUpItemMenuSupport() {
+        MenuListener.getInstance().register(this);
+        mPartyManager = new PartyManager();
     }
 
     public PartyManager getPartyManager() {
