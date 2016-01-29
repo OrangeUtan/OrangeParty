@@ -70,7 +70,7 @@ public class PartyExecutor implements CommandExecutor {
     }
 
     private boolean openPartyMenu(Player sender) {
-        if (plugin.getPartyManager().inParty(((Player)sender).getUniqueId()) != null) {
+        if (plugin.getPartyManager().inParty((sender).getUniqueId()) != null) {
             new PartyMenu(plugin, sender).open(null);
             return true;
         } else {
@@ -82,7 +82,6 @@ public class PartyExecutor implements CommandExecutor {
     private boolean createParty(Player sender) {
         return new CreatePartyCommand(plugin.getPartyManager(), sender.getUniqueId()).execute();
     }
-
 
     private boolean leaveParty(Player sender) {
         return new LeavePartyCommand(plugin.getPartyManager(), sender.getUniqueId()).execute();

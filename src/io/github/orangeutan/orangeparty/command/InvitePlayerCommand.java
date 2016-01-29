@@ -66,7 +66,7 @@ public class InvitePlayerCommand implements IPartyCommand {
         }
 
         // Finally add the Invitation
-        mPartyManager.addInvitation(partyId, targetPlayer.getUniqueId());
+        mPartyManager.addInvitation(partyId, mTargetPlayerId);
         // Notify the Executor
         Utils.sendJsonMsg(executor, String.format(MSG_INVITE_WAS_SENT, targetPlayer.getName()));
         // Notify the invited Player
