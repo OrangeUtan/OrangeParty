@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="OrangeParty">
+    <output-path>$PROJECT_DIR$/../../_server/Debug_Spigot_Plugin_Test_Server/plugins</output-path>
+    <root id="archive" name="OrangeParty.jar">
+      <element id="module-output" name="OrangeParty" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/plugin.yml" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="OrangeItemMenu">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../_server/Debug_Spigot_Plugin_Test_Server/plugins/lib/OrangeItemMenu.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,33 @@
+name: OrangeParty
+main: io.github.orangeutan.orangeparty.OrangeParty
+version: 1.0
+author: OrangeUtan
+
+commands:
+  orange-party:
+    aliases: [party, orpa]
+    description: OrangeParty Base Command
+
+
+permissions:
+  orange-party.*:
+    default: op
+    children:
+      orange-party.create: true
+      orange-party.teleport: true
+      orange-party.kick: true
+      orange-party.invite: true
+      orange-party.leave: true
+      orange-party.accept: true
+  orange-party.create:
+    default: op
+  orange-party.teleport:
+    default: op
+  orange-party.kick:
+    default: op
+  orange-party.invite:
+    default: op
+  orange-party.leave:
+    default: op
+  orange-party.accept:
+    default: op
