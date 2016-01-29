@@ -20,6 +20,7 @@ public class OrangeParty extends JavaPlugin {
     public static final String PERM_KICK_MEMBER = "orange-party.kick";
     public static final String PERM_INVITE_PLAYER = "orange-party.invite";
     public static final String PERM_LEAVE_PARTY = "orange-party.leave";
+    public static final String PERM_ACCEPT_INVITE = "orange-party.accept";
 
     private PartyManager mPartyManager;
 
