@@ -11,7 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class OrangeParty extends JavaPlugin {
 
-    public static final String PREFIX = "[OrangeParty]";
+    public static final String PREFIX = "[OrangeParty] ";
+
     public static final String PERM_ALL = "orange-party.*";
     public static final String PERM_CREATE_PARTY = "orange-party.create";
     public static final String PERM_TELEPORT_TO_MEMBER = "orange-party.teleport";
