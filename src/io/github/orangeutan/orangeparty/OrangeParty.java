@@ -4,6 +4,7 @@ import com.garbagemule.MobArena.MobArena;
 import io.github.orangeutan.orangeitemmenu.MenuListener;
 import io.github.orangeutan.orangeparty.executors.PartyExecutor;
 import io.github.orangeutan.orangeparty.listener.PartyListener;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -11,7 +12,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class OrangeParty extends JavaPlugin {
 
-    public static final String PREFIX = "[OrangeParty]";
+    public static final String PREFIX = ChatColor.GREEN + "OrangeParty -->" + ChatColor.WHITE;
+
     public static final String PERM_ALL = "orange-party.*";
     public static final String PERM_CREATE_PARTY = "orange-party.create";
     public static final String PERM_TELEPORT_TO_MEMBER = "orange-party.teleport";
