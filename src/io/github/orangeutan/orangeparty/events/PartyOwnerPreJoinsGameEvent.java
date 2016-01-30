@@ -1,6 +1,6 @@
 package io.github.orangeutan.orangeparty.events;
 
-import io.github.orangeutan.orangeparty.adapter.IMinigame;
+import io.github.orangeutan.orangeparty.adapter.IMinigameInstance;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -10,14 +10,14 @@ import java.util.UUID;
 /**
  * Created by Michael on 30.01.2016.
  */
-public class PartyOwnerJoinedGameEvent extends Event {
+public class PartyOwnerPreJoinsGameEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
     private Player mOwner;
     private UUID mPartyId;
-    private IMinigame mMinigame;
+    private IMinigameInstance mMinigame;
 
-    public PartyOwnerJoinedGameEvent(Player owner, UUID partyId, IMinigame minigame) {
+    public PartyOwnerPreJoinsGameEvent(Player owner, UUID partyId, IMinigameInstance minigame) {
         mOwner = owner;
         mPartyId = partyId;
         mMinigame = minigame;
@@ -31,7 +31,7 @@ public class PartyOwnerJoinedGameEvent extends Event {
         return mPartyId;
     }
 
-    public IMinigame getMinigame() {
+    public IMinigameInstance getMinigame() {
         return mMinigame;
     }
 
