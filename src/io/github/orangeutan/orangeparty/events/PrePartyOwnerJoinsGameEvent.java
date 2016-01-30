@@ -11,7 +11,7 @@ import java.util.UUID;
 /**
  * Created by Michael on 30.01.2016.
  */
-public class PartyOwnerPreJoinsGameEvent extends Event implements Cancellable{
+public class PrePartyOwnerJoinsGameEvent extends Event implements Cancellable{
 
     private boolean mIsCancelled = false;
     private static final HandlerList handlers = new HandlerList();
@@ -19,7 +19,7 @@ public class PartyOwnerPreJoinsGameEvent extends Event implements Cancellable{
     private UUID mPartyId;
     private IMinigameInstance mMinigame;
 
-    public PartyOwnerPreJoinsGameEvent(Player owner, UUID partyId, IMinigameInstance minigame) {
+    public PrePartyOwnerJoinsGameEvent(Player owner, UUID partyId, IMinigameInstance minigame) {
         mOwner = owner;
         mPartyId = partyId;
         mMinigame = minigame;
