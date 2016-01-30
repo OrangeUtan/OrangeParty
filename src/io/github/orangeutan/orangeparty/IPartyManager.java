@@ -1,4 +1,4 @@
-package io.github.orangeutan.orangeparty.party;
+package io.github.orangeutan.orangeparty;
 
 import java.util.Set;
 import java.util.UUID;

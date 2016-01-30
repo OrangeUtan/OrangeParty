@@ -1,10 +1,10 @@
-package io.github.orangeutan.orangeparty.executor;
+package io.github.orangeutan.orangeparty.executors;
 
 import io.github.orangeutan.orangeparty.OrangeParty;
 import io.github.orangeutan.orangeparty.command.*;
 import io.github.orangeutan.orangeparty.utils.PlayerUtils;
 import io.github.orangeutan.orangeparty.utils.Utils;
-import io.github.orangeutan.orangeparty.menu.PartyMenu;
+import io.github.orangeutan.orangeparty.menus.PartyMenu;
 import mkremins.fanciful.FancyMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

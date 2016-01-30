@@ -1,10 +1,10 @@
-package io.github.orangeutan.orangeparty.menu;
+package io.github.orangeutan.orangeparty.menus;
 
 import io.github.orangeutan.orangeitemmenu.items.CloseItem;
 import io.github.orangeutan.orangeitemmenu.menus.StaticMenu;
 import io.github.orangeutan.orangeparty.OrangeParty;
-import io.github.orangeutan.orangeparty.menu.item.PartyMemberItem;
-import io.github.orangeutan.orangeparty.party.PartyManager;
+import io.github.orangeutan.orangeparty.menus.item.PartyMemberItem;
+import io.github.orangeutan.orangeparty.PartyManager;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

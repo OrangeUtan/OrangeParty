@@ -1,4 +1,4 @@
-package io.github.orangeutan.orangeparty.menu.item;
+package io.github.orangeutan.orangeparty.menus.item;
 
 import io.github.orangeutan.orangeitemmenu.events.ItemClickEvent;
 import io.github.orangeutan.orangeitemmenu.items.StaticItem;

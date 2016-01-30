@@ -2,9 +2,8 @@ package io.github.orangeutan.orangeparty;
 
 import com.garbagemule.MobArena.MobArena;
 import io.github.orangeutan.orangeitemmenu.MenuListener;
-import io.github.orangeutan.orangeparty.executor.PartyExecutor;
+import io.github.orangeutan.orangeparty.executors.PartyExecutor;
 import io.github.orangeutan.orangeparty.listener.PartyListener;
-import io.github.orangeutan.orangeparty.party.PartyManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**

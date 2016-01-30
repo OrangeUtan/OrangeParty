@@ -1,7 +1,7 @@
 package io.github.orangeutan.orangeparty.command;
 
 import io.github.orangeutan.orangeparty.OrangeParty;
-import io.github.orangeutan.orangeparty.party.IPartyManager;
+import io.github.orangeutan.orangeparty.IPartyManager;
 import io.github.orangeutan.orangeparty.utils.PlayerUtils;
 import io.github.orangeutan.orangeparty.utils.Utils;
 import mkremins.fanciful.FancyMessage;

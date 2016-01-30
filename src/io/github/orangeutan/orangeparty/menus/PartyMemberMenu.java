@@ -1,11 +1,11 @@
-package io.github.orangeutan.orangeparty.menu;
+package io.github.orangeutan.orangeparty.menus;
 
 import io.github.orangeutan.orangeitemmenu.items.NavigateItem;
 import io.github.orangeutan.orangeitemmenu.menus.IItemMenu;
 import io.github.orangeutan.orangeitemmenu.menus.StaticMenu;
 import io.github.orangeutan.orangeparty.OrangeParty;
-import io.github.orangeutan.orangeparty.menu.item.PartyMemberKickItem;
-import io.github.orangeutan.orangeparty.menu.item.PartyMemberTeleportItem;
+import io.github.orangeutan.orangeparty.menus.item.PartyMemberKickItem;
+import io.github.orangeutan.orangeparty.menus.item.PartyMemberTeleportItem;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;

@@ -1,4 +1,4 @@
-package io.github.orangeutan.orangeparty.party;
+package io.github.orangeutan.orangeparty;
 
 import io.github.orangeutan.orangeparty.utils.Utils;
 import org.bukkit.Bukkit;

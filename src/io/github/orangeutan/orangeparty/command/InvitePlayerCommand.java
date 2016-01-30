@@ -1,13 +1,12 @@
 package io.github.orangeutan.orangeparty.command;
 
 import io.github.orangeutan.orangeparty.OrangeParty;
-import io.github.orangeutan.orangeparty.executor.PartyExecutor;
-import io.github.orangeutan.orangeparty.party.IPartyManager;
+import io.github.orangeutan.orangeparty.executors.PartyExecutor;
+import io.github.orangeutan.orangeparty.IPartyManager;
 import io.github.orangeutan.orangeparty.utils.Utils;
 import mkremins.fanciful.FancyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
