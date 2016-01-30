@@ -1,14 +1,11 @@
 package io.github.orangeutan.orangeparty;
 
+import com.garbagemule.MobArena.MobArena;
 import io.github.orangeutan.orangeitemmenu.MenuListener;
 import io.github.orangeutan.orangeparty.executor.PartyExecutor;
 import io.github.orangeutan.orangeparty.listener.PartyListener;
-import io.github.orangeutan.orangeparty.party.IPartyManager;
 import io.github.orangeutan.orangeparty.party.PartyManager;
-import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.*;
 
 /**
  * Created by Michael on 27.01.2016.
@@ -24,6 +21,7 @@ public class OrangeParty extends JavaPlugin {
     public static final String PERM_ACCEPT_INVITE = "orange-party.accept";
 
     private PartyManager mPartyManager;
+    private MobArena mMobArena;
 
     @Override
     public void onEnable() {
@@ -45,7 +43,15 @@ public class OrangeParty extends JavaPlugin {
         mPartyManager = new PartyManager();
     }
 
+    private void setUpMobArenaSupport() {
+        mMobArena = (MobArena) getServer().getPluginManager().getPlugin("MobArena");
+    }
+
     public PartyManager getPartyManager() {
         return mPartyManager;
+    }
+
+    public MobArena getMobArena() {
+        return mMobArena;
     }
 }
