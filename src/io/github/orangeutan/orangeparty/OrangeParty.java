@@ -28,6 +28,8 @@ public class OrangeParty extends JavaPlugin {
         super.onEnable();
 
         setUpItemMenuSupport();
+        setUpMobArenaSupport();
+        setUpConfig();
 
         new PartyExecutor(this);
         new PartyListener(this);
@@ -45,6 +47,11 @@ public class OrangeParty extends JavaPlugin {
 
     private void setUpMobArenaSupport() {
         mMobArena = (MobArena) getServer().getPluginManager().getPlugin("MobArena");
+    }
+
+    private void setUpConfig() {
+        getConfig().options().copyDefaults(true);
+        saveConfig();
     }
 
     public PartyManager getPartyManager() {

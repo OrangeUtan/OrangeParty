@@ -1,0 +1,12 @@
+# Kick Players out of their Party when they quit (get kicked, banned) off of the Server
+kick-partymember-on-quit: true
+# Maximum Time in Milliseconds before offline Partymembers get kicked out of their Party
+max-offtime-before-partymember-kicked: 0
+# Automatically let Partymembers join the Party Owner to the Minigame (or GameLobby, if there is any)
+autojoin-minigame:
+  mobarena:
+    only-when-enough-capacity: true
+    cancel-owner-join-when-full: true
+  bedwars:
+    only-when-enough-capacity: true
+    cancel-owner-join-when-full: true
