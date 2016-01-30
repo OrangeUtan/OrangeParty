@@ -6,7 +6,7 @@ max-offtime-before-partymember-kicked: 0
 autojoin-minigame:
   mobarena:
     only-when-enough-capacity: true
-    cancel-owner-join-when-full: true
+    cancel-owner-join-when-members-cant-join: true
   bedwars:
     only-when-enough-capacity: true
-    cancel-owner-join-when-full: true
+    cancel-owner-join-when-members-cant-join: true
