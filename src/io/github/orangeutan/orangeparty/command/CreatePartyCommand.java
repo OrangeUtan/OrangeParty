@@ -18,9 +18,9 @@ public class CreatePartyCommand implements IPartyCommand {
     private IPartyManager mPartyManager;
     private UUID mExecutorId;
 
-    private static final String ERROR_YOU_CANT_USE_THIS_COMMAND = new FancyMessage("Du kannst diesen Command nicht benutzen").color(ChatColor.RED).toJSONString();
-    private static final String ERROR_ALLREADY_IN_PARTY = new FancyMessage("Du bist bereits in einer Party").color(ChatColor.RED).toJSONString();
-    private static final String MSG_PARTY_CREATED = new FancyMessage("Party erfolgreich erstellt").toJSONString();
+    private static final String ERROR_YOU_CANT_USE_THIS_COMMAND = new FancyMessage(OrangeParty.PREFIX + "Du kannst diesen Command nicht benutzen").color(ChatColor.RED).toJSONString();
+    private static final String ERROR_ALLREADY_IN_PARTY = new FancyMessage(OrangeParty.PREFIX + "Du bist bereits in einer Party").color(ChatColor.RED).toJSONString();
+    private static final String MSG_PARTY_CREATED = new FancyMessage(OrangeParty.PREFIX + "Party erfolgreich erstellt").toJSONString();
 
     public CreatePartyCommand(IPartyManager partyManager, UUID executorId) {
         mPartyManager = partyManager;

@@ -21,14 +21,14 @@ public class InvitePlayerCommand implements IPartyCommand {
     private UUID mExecutorId;
     private UUID mTargetPlayerId;
 
-    private static final String ERROR_YOU_CANT_USE_THIS_COMMAND = new FancyMessage("Du kannst diesen Command nicht benutzen").color(ChatColor.RED).toJSONString();
-    private static final String ERROR_YOU_HAVE_TO_BE_IN_A_PARTY = new FancyMessage("Du musst in einer Party sein um diesen Befehl auszuführen").color(ChatColor.RED).toJSONString();
-    private static final String ERROR_YOU_HAVE_TO_BE_PARTY_OWNER = new FancyMessage("Du musst Owner der Party sein um diesen Command auszuführen").color(ChatColor.RED).toJSONString();
+    private static final String ERROR_YOU_CANT_USE_THIS_COMMAND = new FancyMessage(OrangeParty.PREFIX + "Du kannst diesen Command nicht benutzen").color(ChatColor.RED).toJSONString();
+    private static final String ERROR_YOU_HAVE_TO_BE_IN_A_PARTY = new FancyMessage(OrangeParty.PREFIX + "Du musst in einer Party sein um diesen Befehl auszuführen").color(ChatColor.RED).toJSONString();
+    private static final String ERROR_YOU_HAVE_TO_BE_PARTY_OWNER = new FancyMessage(OrangeParty.PREFIX + "Du musst Owner der Party sein um diesen Command auszuführen").color(ChatColor.RED).toJSONString();
 
-    private static final String MSG_INVITE_WAS_SENT = new FancyMessage("Einladung an")
+    private static final String MSG_INVITE_WAS_SENT = new FancyMessage(OrangeParty.PREFIX + "Einladung an")
                                                         .then(" %s ").color(ChatColor.GOLD)
                                                         .then("wurde erfolgreich verschickt").toJSONString();
-    private static final String MSG_YOU_WERE_INVITED_BY = new FancyMessage("Du wurdest von ")
+    private static final String MSG_YOU_WERE_INVITED_BY = new FancyMessage(OrangeParty.PREFIX + "Du wurdest von ")
                                     .then(" %1$s ").color(ChatColor.GOLD)
                                     .then(" in eine Party Eingeladen. ")
                                     .then("/" + PartyExecutor.command + " " + PartyExecutor.OP_ACCEPT_INVITATION + " %1$s").color(ChatColor.GOLD).command("/" + PartyExecutor.command + " " + PartyExecutor.OP_ACCEPT_INVITATION + " %1$s")

@@ -28,9 +28,9 @@ public class PartyExecutor implements CommandExecutor {
     public static final String OP_ACCEPT_INVITATION = "accept";
     public static final String OP_KICK = "kick";
 
-    private static final String ERROR_SENDER_MUST_BE_PLAYER = "Du musst ein Spieler sein um diesen Befehl auszuführen";
-    private static final String ERROR_NO_PLAYER_ENTERED = "Du musst einen Spielernamen eingeben";
-    private static final String ERROR_PLAYER_DOES_NOT_EXIST = new FancyMessage("Der Spieler").color(ChatColor.RED)
+    private static final String ERROR_SENDER_MUST_BE_PLAYER = OrangeParty.PREFIX + "Du musst ein Spieler sein um diesen Befehl auszuführen";
+    private static final String ERROR_NO_PLAYER_ENTERED = OrangeParty.PREFIX + "Du musst einen Spielernamen eingeben";
+    private static final String ERROR_PLAYER_DOES_NOT_EXIST = new FancyMessage(OrangeParty.PREFIX + "Der Spieler").color(ChatColor.RED)
                                                                 .then(" %s ").color(ChatColor.GOLD)
                                                                 .then("existiert nicht oder ist nicht online").color(ChatColor.RED).toJSONString();
 

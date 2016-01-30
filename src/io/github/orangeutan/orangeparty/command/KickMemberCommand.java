@@ -21,16 +21,16 @@ public class KickMemberCommand implements IPartyCommand {
     private String mMemberName;
     private UUID mExecutorId;
 
-    private static final String ERROR_YOU_CANT_USE_THIS_COMMAND = new FancyMessage("Du kannst diesen Command nicht benutzen").color(ChatColor.RED).toJSONString();
-    private static final String ERROR_YOU_HAVE_TO_BE_OWNER = new FancyMessage("Du musst Owner der Party sein um diesen Command auszuführen").color(ChatColor.RED).toJSONString();
-    private static final String ERROR_PLAYER_IS_NOT_IN_PARTY = new FancyMessage("Der Spieler").color(ChatColor.RED)
+    private static final String ERROR_YOU_CANT_USE_THIS_COMMAND = new FancyMessage(OrangeParty.PREFIX + "Du kannst diesen Command nicht benutzen").color(ChatColor.RED).toJSONString();
+    private static final String ERROR_YOU_HAVE_TO_BE_OWNER = new FancyMessage(OrangeParty.PREFIX + "Du musst Owner der Party sein um diesen Command auszuführen").color(ChatColor.RED).toJSONString();
+    private static final String ERROR_PLAYER_IS_NOT_IN_PARTY = new FancyMessage(OrangeParty.PREFIX + "Der Spieler").color(ChatColor.RED)
                                                                     .then(" %s ").color(ChatColor.GOLD)
                                                                     .then("ist nicht in deiner Party").color(ChatColor.RED).toJSONString();
 
-    private static final String MSG_YOU_WERE_KICKED = new FancyMessage("Du wurdest aus der Party von").color(ChatColor.RED)
+    private static final String MSG_YOU_WERE_KICKED = new FancyMessage(OrangeParty.PREFIX + "Du wurdest aus der Party von").color(ChatColor.RED)
                                                         .then(" %s ").color(ChatColor.GOLD)
                                                         .then("gekickt").color(ChatColor.RED).toJSONString();
-    private static final String MSG_MEMBER_WAS_KICKED = new FancyMessage("Spieler")
+    private static final String MSG_MEMBER_WAS_KICKED = new FancyMessage(OrangeParty.PREFIX + "Spieler")
                                                             .then(" %s ").color(ChatColor.GOLD)
                                                             .then("wurde aus deiner Party gekickt").toJSONString();
 

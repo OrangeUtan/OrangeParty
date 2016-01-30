@@ -21,19 +21,19 @@ public class AcceptInvitationCommand implements IPartyCommand {
     private UUID mExecuterId;
     private UUID mPartyId;
 
-    private static final String ERROR_YOU_CANT_USE_THIS_COMMAND = new FancyMessage("Du kannst diesen Command nicht benutzen").color(ChatColor.RED).toJSONString();
-    private static final String ERROR_NOT_INVITED_TO_PARTY = new FancyMessage("Du wurdest nicht in die Party von")
+    private static final String ERROR_YOU_CANT_USE_THIS_COMMAND = new FancyMessage(OrangeParty.PREFIX + "Du kannst diesen Command nicht benutzen").color(ChatColor.RED).toJSONString();
+    private static final String ERROR_NOT_INVITED_TO_PARTY = new FancyMessage(OrangeParty.PREFIX + "Du wurdest nicht in die Party von")
                                                                 .then(" %s ").color(ChatColor.GOLD)
                                                                 .then("eingeladen").toJSONString();
-    private static final String ERROR_SENDER_ALREADY_IN_PARTY = new FancyMessage("Du bist schon in einer Party. Willst du stattdessen deine Party verlassen?")
+    private static final String ERROR_SENDER_ALREADY_IN_PARTY = new FancyMessage(OrangeParty.PREFIX + "Du bist schon in einer Party. Willst du stattdessen deine Party verlassen?")
                                                                     .then(" /" + PartyExecutor.command + " " + PartyExecutor.OP_LEAVE_PARTY).color(ChatColor.GOLD).command("/" + PartyExecutor.command + " " + PartyExecutor.OP_LEAVE_PARTY)
                                                                     .toJSONString();
-    private static final String ERROR_ACCEPT_FAILED = new FancyMessage("Der Befehl ist fehlgeschlagen").color(ChatColor.RED).toJSONString();
+    private static final String ERROR_ACCEPT_FAILED = new FancyMessage(OrangeParty.PREFIX + "Der Befehl ist fehlgeschlagen").color(ChatColor.RED).toJSONString();
 
-    private static final String MSG_YOU_JOINED_THE_PARTY = new FancyMessage("Du bist der Party von")
+    private static final String MSG_YOU_JOINED_THE_PARTY = new FancyMessage(OrangeParty.PREFIX + "Du bist der Party von")
                                                             .then(" %s ").color(ChatColor.GOLD)
                                                             .then("beigetreten").toJSONString();
-    private static final String MSG_PLAYER_JOINED_YOUR_PARTY = new FancyMessage("Der Spieler")
+    private static final String MSG_PLAYER_JOINED_YOUR_PARTY = new FancyMessage(OrangeParty.PREFIX + "Der Spieler")
                                                                 .then(" %s ").color(ChatColor.GOLD)
                                                                 .then("ist deiner Party beigetreten").toJSONString();
 

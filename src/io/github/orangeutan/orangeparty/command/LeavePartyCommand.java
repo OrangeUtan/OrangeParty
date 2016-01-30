@@ -18,14 +18,14 @@ public class LeavePartyCommand implements IPartyCommand {
     private IPartyManager mPartyManager;
     private UUID mExecutor;
 
-    private static final String ERROR_YOU_CANT_USE_THIS_COMMAND = new FancyMessage("Du kannst diesen Command nicht benutzen").color(ChatColor.RED).toJSONString();
-    private static final String ERROR_NOT_IN_A_PARTY = new FancyMessage("Du bist in keiner Party").color(ChatColor.RED).toJSONString();
+    private static final String ERROR_YOU_CANT_USE_THIS_COMMAND = new FancyMessage(OrangeParty.PREFIX + "Du kannst diesen Command nicht benutzen").color(ChatColor.RED).toJSONString();
+    private static final String ERROR_NOT_IN_A_PARTY = new FancyMessage(OrangeParty.PREFIX + "Du bist in keiner Party").color(ChatColor.RED).toJSONString();
 
-    private static final String MSG_YOU_LEFT_THE_PARTY = new FancyMessage("Du hast die Party verlassen").toJSONString();
-    private static final String MSG_PLAYER_LEFT_YOUR_PARTY = new FancyMessage("Der Spieler")
+    private static final String MSG_YOU_LEFT_THE_PARTY = new FancyMessage(OrangeParty.PREFIX + "Du hast die Party verlassen").toJSONString();
+    private static final String MSG_PLAYER_LEFT_YOUR_PARTY = new FancyMessage(OrangeParty.PREFIX + "Der Spieler")
                                                                 .then(" %s ").color(ChatColor.GOLD)
                                                                 .then("hat deine Party verlassen").toJSONString();
-    private static final String MSG_PARTY_WAS_REMOVED = new FancyMessage("Die Party wurde vom Owner aufgelöst").toJSONString();
+    private static final String MSG_PARTY_WAS_REMOVED = new FancyMessage(OrangeParty.PREFIX + "Die Party wurde vom Owner aufgelöst").toJSONString();
 
     public LeavePartyCommand(IPartyManager partyManager, UUID executor) {
         mPartyManager = partyManager;
