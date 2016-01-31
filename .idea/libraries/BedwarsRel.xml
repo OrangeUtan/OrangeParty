@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="BedwarsRel">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../_plugins/BedwarsRel.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
