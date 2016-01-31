@@ -34,7 +34,7 @@ public class MobArenaAdapter implements IMinigameInstance {
     @Override
     public boolean join(Player player) {
         if (mArena.canJoin(player)) {
-            mArena.playerJoin(player, mArena.getRegion().getLobbyWarp());
+            mArena.playerJoin(player, player.getLocation());
         }
         return false;
     }
@@ -43,7 +43,7 @@ public class MobArenaAdapter implements IMinigameInstance {
     public Set<Player> joinAll(Set<Player> players) {
         HashSet<Player> playersWhoCouldNotJoin = new HashSet<>();
         for (Player player : players) {
-            if (!mArena.playerJoin(player, mArena.getRegion().getLobbyWarp())) playersWhoCouldNotJoin.add(player);
+            if (!mArena.playerJoin(player, player.getLocation())) playersWhoCouldNotJoin.add(player);
         }
         return playersWhoCouldNotJoin;
     }
