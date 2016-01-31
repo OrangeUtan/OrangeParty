@@ -9,6 +9,8 @@ import java.util.Set;
  */
 public interface IMinigameInstance {
 
+    boolean hasEnoughSpaceFor(int playerAmount);
+
     /**
      * Check if all the {@link Player} can join the Minigame
      * @param player The {@link Player}s to check if they can join the Minigame

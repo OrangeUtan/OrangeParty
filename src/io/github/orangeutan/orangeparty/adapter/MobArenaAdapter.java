@@ -18,6 +18,11 @@ public class MobArenaAdapter implements IMinigameInstance {
     }
 
     @Override
+    public boolean hasEnoughSpaceFor(int playerAmount) {
+        return mArena.getMaxPlayers() - mArena.getPlayerCount() >= playerAmount;
+    }
+
+    @Override
     public boolean canPlayerJoin(Player player) {
         return mArena.canJoin(player);
     }
