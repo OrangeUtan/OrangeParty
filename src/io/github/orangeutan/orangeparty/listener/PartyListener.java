@@ -3,8 +3,9 @@ package io.github.orangeutan.orangeparty.listener;
 import com.garbagemule.MobArena.events.ArenaPlayerJoinEvent;
 import io.github.orangeutan.orangeparty.OrangeParty;
 import io.github.orangeutan.orangeparty.adapter.MobArenaAdapter;
-import io.github.orangeutan.orangeparty.events.PrePartyOwnerJoinsGameEvent;
+import io.github.orangeutan.orangeparty.events.PartyOwnerJoinGameEvent;
 import io.github.orangeutan.orangeparty.utils.Utils;
+import io.github.yannici.bedwars.Events.BedwarsPlayerJoinEvent;
 import mkremins.fanciful.FancyMessage;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
@@ -14,7 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.util.StringUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -74,18 +74,25 @@ public class PartyListener implements Listener {
         if (partyId != null) {
             // Player has to be Owner of the Party
             if (mPlugin.getPartyManager().isOwner(partyId, event.getPlayer().getUniqueId())) {
-                // Call a new PrePartyOwnerJoinsGameEvent to let the
-                PrePartyOwnerJoinsGameEvent prePartyOwnerJoinsGameEvent = new PrePartyOwnerJoinsGameEvent(event.getPlayer(), partyId, new MobArenaAdapter(event.getArena()));
-                Bukkit.getServer().getPluginManager().callEvent(prePartyOwnerJoinsGameEvent);
+                // Call a new PartyOwnerJoinGameEvent to let the
+                PartyOwnerJoinGameEvent partyOwnerJoinGameEvent = new PartyOwnerJoinGameEvent(event.getPlayer(), partyId, new MobArenaAdapter(event.getArena()));
+                Bukkit.getServer().getPluginManager().callEvent(partyOwnerJoinGameEvent);
 
-                // Cancel the Player joining the MobArena if the PrePartyOwnerJoinsGameEvent gets cancelled and the associated Configuration is set to true
-                if (prePartyOwnerJoinsGameEvent.isCancelled() && mPlugin.getConfig().getBoolean(OrangeParty.CFG_AUTOJOIN_MA_CANCEL_OWNER_JOIN_WHEN_MEMBERS_CANT_JOIN)) event.setCancelled(true);
+                // Cancel the Player joining the MobArena if the PartyOwnerJoinGameEvent gets cancelled and the associated Configuration is set to true
+                if (partyOwnerJoinGameEvent.isCancelled() && mPlugin.getConfig().getBoolean(OrangeParty.CFG_AUTOJOIN_MA_CANCEL_OWNER_JOIN_WHEN_MEMBERS_CANT_JOIN)) event.setCancelled(true);
             }
         }
     }
 
     @EventHandler
-    public void onPrePartyOwnerJoinsGame(PrePartyOwnerJoinsGameEvent event) {
+    public void onPrePartyOwnerJoinsGame(PartyOwnerJoinGameEvent event) {
+
+        // Check if the Owner can join the Minigame
+        if (!event.getMinigame().canPlayerJoin(event.getOwner())) {
+            event.setCancelled(true);
+            return;
+        }
+
         Set<Player> partyMembers = new HashSet<>();
         // Get the online Party Members of the Party Owner
         for (UUID memberId : mPlugin.getPartyManager().getPartyMembersOf(event.getOwner().getUniqueId())) {
