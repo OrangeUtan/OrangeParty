@@ -17,6 +17,12 @@ public interface IMinigameInstance {
     boolean hasEnoughSpaceFor(int playerAmount);
 
     /**
+     * Check if the Game supports Teams
+     * @return true if Game supports Teams, false otherwise
+     */
+    boolean hasTeams();
+
+    /**
      * Check if the {@link Player} can join the Minigame. Checks if the Game is already running, is stopped, has enough space, etc.
      * @param player The {@link Player}s to check if they can join the Minigame
      * @return true if the {@link Player} can join the Minigame, false otherwise
@@ -31,6 +37,13 @@ public interface IMinigameInstance {
     Set<Player> canPlayersJoin(Set<Player> players);
 
     /**
+     * Check if all the {@link Player}s in the {@link Set} can join the Game as a Team
+     * @param players The {@link Player}s to check if they can join the Game as a Team
+     * @return false if the {@link Player}s can't join as a Team
+     */
+    boolean canPlayersJoinAsTeam(Set<Player> players);
+
+    /**
      * Add a {@link Player} to the Minigame
      * @param player The {@link Player} who should be added to the Minigame
      * @return true if the {@link Player} was added to the Minigame, false otherwise
@@ -43,6 +56,13 @@ public interface IMinigameInstance {
      * @return A {@link Set} of the Players who failed to join the Minigame
      */
     Set<Player> joinAll(Set<Player> players);
+
+    /**
+     * Add all {@link Player}s in the {@link Set} to the Minigame as a Team
+     * @param players The {@link Player}s which should be added to the Minigame as a Team
+     * @return A {@link Set} of the Players who failed to join the Minigame as a Team
+     */
+    Set<Player> joinAllAsTeam(Set<Player> players);
 
     /**
      * Remove a {@link Player} from the Minigame

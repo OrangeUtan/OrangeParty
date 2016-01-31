@@ -23,6 +23,12 @@ public class MobArenaAdapter implements IMinigameInstance {
     }
 
     @Override
+    public boolean hasTeams() {
+        // MobArena has no Team Support
+        return false;
+    }
+
+    @Override
     public boolean canPlayerJoin(Player player) {
         return mArena.canJoin(player);
     }
@@ -34,6 +40,12 @@ public class MobArenaAdapter implements IMinigameInstance {
             if (!mArena.canJoin(player)) playersWhoCanNotJoin.add(player);
         }
         return playersWhoCanNotJoin;
+    }
+
+    @Override
+    public boolean canPlayersJoinAsTeam(Set<Player> players) {
+        // MobArena has no Team Support
+        return false;
     }
 
     @Override
@@ -51,6 +63,11 @@ public class MobArenaAdapter implements IMinigameInstance {
             if (!mArena.playerJoin(player, player.getLocation())) playersWhoCouldNotJoin.add(player);
         }
         return playersWhoCouldNotJoin;
+    }
+
+    @Override
+    public Set<Player> joinAllAsTeam(Set<Player> players) {
+        return joinAll(players);
     }
 
     @Override
