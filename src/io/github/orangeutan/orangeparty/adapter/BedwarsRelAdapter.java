@@ -81,6 +81,20 @@ public class BedwarsRelAdapter implements IMinigameInstance {
     }
 
     @Override
+    public Set<Player> joinAllAsTeam(IMinigameTeam team, Set<Player> players) {
+        // If the Team has not enough free Space for all Players, return all Players
+        if (!team.hasEnoughFreeSpaceFor(players.size())) return players;
+        // Add all Players to the Minigame. Save the Players who could not join
+        HashSet<Player> couldNotJoin = (HashSet<Player>) joinAll(players);
+        // Remove all Players who could not join the Game
+        players.removeAll(couldNotJoin);
+        // Add only the Players who could join to the Team
+        team.addAllPlayers(players);
+        // Return the Player who could not join the Minigame
+        return couldNotJoin;
+    }
+
+    @Override
     public boolean leave(Player player) {
         return mBedwars.playerLeave(player, false); // False for Player left, true for Player kicked
     }
