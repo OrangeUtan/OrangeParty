@@ -2,6 +2,8 @@ package io.github.orangeutan.orangeparty.listener;
 
 import com.garbagemule.MobArena.events.ArenaPlayerJoinEvent;
 import io.github.orangeutan.orangeparty.OrangeParty;
+import io.github.orangeutan.orangeparty.adapter.BedwarsRelAdapter;
+import io.github.orangeutan.orangeparty.adapter.IMinigameTeam;
 import io.github.orangeutan.orangeparty.adapter.MobArenaAdapter;
 import io.github.orangeutan.orangeparty.events.PartyOwnerJoinGameEvent;
 import io.github.orangeutan.orangeparty.utils.Utils;
@@ -67,7 +69,7 @@ public class PartyListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerJoinMobArena(ArenaPlayerJoinEvent event) { // Called when a Player joins a MobArena
+    public void onPlayerJoinsMobArena(ArenaPlayerJoinEvent event) { // Called when a Player joins a MobArena
         // Get the Party in which the Player is in
         UUID partyId = mPlugin.getPartyManager().inParty(event.getPlayer().getUniqueId());
         // Check if the Player is in a Party
@@ -85,7 +87,25 @@ public class PartyListener implements Listener {
     }
 
     @EventHandler
-    public void onPrePartyOwnerJoinsGame(PartyOwnerJoinGameEvent event) {
+    public void onPlayerJoinsBedwars(BedwarsPlayerJoinEvent event) {
+        // Get the Party in which the Player is in
+        UUID partyId = mPlugin.getPartyManager().inParty(event.getPlayer().getUniqueId());
+        // Check if the Player is in a Party
+        if (partyId != null) {
+            // Player has to be Owner of the Party
+            if (mPlugin.getPartyManager().isOwner(partyId, event.getPlayer().getUniqueId())) {
+                // Call a new PartyOwnerJoinGameEvent to let the
+                PartyOwnerJoinGameEvent partyOwnerJoinGameEvent = new PartyOwnerJoinGameEvent(event.getPlayer(), partyId, new BedwarsRelAdapter(event.getGame()));
+                Bukkit.getServer().getPluginManager().callEvent(partyOwnerJoinGameEvent);
+
+                // Cancel the Player joining the MobArena if the PartyOwnerJoinGameEvent gets cancelled and the associated Configuration is set to true
+                if (partyOwnerJoinGameEvent.isCancelled() && mPlugin.getConfig().getBoolean(OrangeParty.CFG_AUTOJOIN_MA_CANCEL_OWNER_JOIN_WHEN_MEMBERS_CANT_JOIN)) event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPartyOwnerJoinsGame(PartyOwnerJoinGameEvent event) {
 
         // Check if the Owner can join the Minigame
         if (!event.getMinigame().canPlayerJoin(event.getOwner())) {
@@ -93,16 +113,16 @@ public class PartyListener implements Listener {
             return;
         }
 
-        Set<Player> partyMembers = new HashSet<>();
-        // Get the online Party Members of the Party Owner
+        Set<Player> partyMembersMinusOwner = new HashSet<>();
+        // Get the online Party Members of the Party Owner, Owner excluded
         for (UUID memberId : mPlugin.getPartyManager().getPartyMembersOf(event.getOwner().getUniqueId())) {
             OfflinePlayer offlineMember = Bukkit.getOfflinePlayer(memberId);
             // The Party Member has to be online to join the Minigame
-            if (offlineMember.isOnline()) partyMembers.add((Player) offlineMember);
+            if (offlineMember.isOnline()) partyMembersMinusOwner.add((Player) offlineMember);
         }
 
         // Check if all Party Members can join the Minigame
-        Set<Player> canNotJoin = event.getMinigame().canPlayersJoin(partyMembers);
+        Set<Player> canNotJoin = event.getMinigame().canPlayersJoin(partyMembersMinusOwner);
         // Check if some Party Members can not join the Minigame
         if (!canNotJoin.isEmpty()) {
             String canNotJoinString = StringUtils.join(Utils.getPlayerNames(canNotJoin), ",");
@@ -116,15 +136,32 @@ public class PartyListener implements Listener {
                 return;
             }
             // Remove the Members who can not join the Minigame
-            partyMembers.remove(canNotJoin.toArray());
+            partyMembersMinusOwner.remove(canNotJoin.toArray());
         }
 
-        // Add all Party Members to the Minigame. Save the Members who could not join the Minigame
-        canNotJoin = event.getMinigame().joinAll(partyMembers);
-        if (!canNotJoin.isEmpty()) {
-            String couldNotJoinString = StringUtils.join(Utils.getPlayerNames(canNotJoin), ",");
+        Set<Player> couldNotJoin = new HashSet<>();
+        // Check if the Minigame supports Teams and the Party can join as a Team
+        if (event.getMinigame().hasTeams()) {
+            Set<Player> partyMembersPlusOwner = new HashSet<>(partyMembersMinusOwner);
+            partyMembersPlusOwner.add(event.getOwner());
+
+            // Get a Team in which all Players (Plus the Party Owner) can join
+            IMinigameTeam team = event.getMinigame().canPlayersJoinAsTeam(partyMembersPlusOwner);
+            if (team!= null) {
+                // Add all Party Members (Minus the Party Owner) to the Minigame as a Team. Save the Members who could not join the Team
+                couldNotJoin = event.getMinigame().joinAllAsTeam(team, partyMembersMinusOwner);
+                // Add the Party Owner to the team
+                team.addPlayer(event.getOwner());
+            }
+        } else {
+            // Add all Party Members to the Minigame. Save the Members who could not join the Minigame
+            couldNotJoin = event.getMinigame().joinAll(partyMembersMinusOwner);
+        }
+
+        if (!couldNotJoin.isEmpty()) {
+            String couldNotJoinString = StringUtils.join(Utils.getPlayerNames(couldNotJoin), ",");
             Utils.sendJsonMsg(event.getOwner(), String.format(ERROR_PLAYERS_COULD_NOT_FOLLOW, couldNotJoinString));
-            Utils.sendJsonMsg(canNotJoin, String.format(ERROR_YOU_COULD_NOT_FOLLOW_THE_PARTY_OWNER, event.getOwner().getName()));
+            Utils.sendJsonMsg(couldNotJoin, String.format(ERROR_YOU_COULD_NOT_FOLLOW_THE_PARTY_OWNER, event.getOwner().getName()));
         }
     }
 }
