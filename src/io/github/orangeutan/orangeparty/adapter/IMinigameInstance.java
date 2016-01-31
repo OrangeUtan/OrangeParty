@@ -9,17 +9,22 @@ import java.util.Set;
  */
 public interface IMinigameInstance {
 
+    /**
+     * Check if the Game has enough free Space for the entered Amount of Players
+     * @param playerAmount The Amount of Players
+     * @return true if Game has enough free Space, false otherwise
+     */
     boolean hasEnoughSpaceFor(int playerAmount);
 
     /**
-     * Check if all the {@link Player} can join the Minigame
+     * Check if the {@link Player} can join the Minigame. Checks if the Game is already running, is stopped, has enough space, etc.
      * @param player The {@link Player}s to check if they can join the Minigame
      * @return true if the {@link Player} can join the Minigame, false otherwise
      */
     boolean canPlayerJoin(Player player);
 
     /**
-     * Check if all the {@link Player}s in the {@link Set} can join the Minigame
+     * Check if all the {@link Player}s in the {@link Set} can join the Minigame. Checks if the Game is already running, is stopped, has enough space, etc.
      * @param players The {@link Player}s to check if they can join the Minigame
      * @return A {@link Set} of the {@link Player}s who can not join the Minigame
      */
