@@ -43,9 +43,9 @@ public class MobArenaAdapter implements IMinigameInstance {
     }
 
     @Override
-    public boolean canPlayersJoinAsTeam(Set<Player> players) {
+    public IMinigameTeam canPlayersJoinAsTeam(Set<Player> players) {
         // MobArena has no Team Support
-        return false;
+        return null;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class MobArenaAdapter implements IMinigameInstance {
     }
 
     @Override
-    public Set<Player> joinAllAsTeam(Set<Player> players) {
+    public Set<Player> joinAllAsTeam(IMinigameTeam team, Set<Player> players) {
         return joinAll(players);
     }
 

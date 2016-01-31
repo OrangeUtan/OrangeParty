@@ -58,11 +58,12 @@ public interface IMinigameInstance {
     Set<Player> joinAll(Set<Player> players);
 
     /**
-     * Add all {@link Player}s in the {@link Set} to the Minigame as a Team
-     * @param players The {@link Player}s which should be added to the Minigame as a Team
-     * @return A {@link Set} of the Players who failed to join the Minigame as a Team
+     * Add all {@link Player}s in the {@link Set} to the {@link IMinigameTeam}
+     * @param players The {@link Player}s which should be added to the {@link IMinigameTeam}
+     * @param team The {@link IMinigameTeam} in which the {@link Player}s should join
+     * @return A {@link Set} of the Players who failed to join the {@link IMinigameTeam}
      */
-    Set<Player> joinAllAsTeam(Set<Player> players);
+    Set<Player> joinAllAsTeam(IMinigameTeam team, Set<Player> players);
 
     /**
      * Remove a {@link Player} from the Minigame
