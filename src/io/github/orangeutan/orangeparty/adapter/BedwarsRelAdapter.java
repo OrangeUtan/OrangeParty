@@ -53,15 +53,17 @@ public class BedwarsRelAdapter implements IMinigameInstance {
     }
 
     @Override
-    public boolean canPlayersJoinAsTeam(Set<Player> players) {
-        if (!hasTeams()) return false;
-        if(!canPlayersJoin(players).isEmpty()) return false;
+    public IMinigameTeam canPlayersJoinAsTeam(Set<Player> players) {
+        if (!hasTeams()) return null;
+        if(!canPlayersJoin(players).isEmpty()) return null;
 
         // Check if a Team has enough free Space for all Party Members
         for (Team team: mBedwars.getTeams().values()) {
-            if (team.getMaxPlayers() - team.getPlayers().size() >= players.size()) return true;
+            // Return the Team if it has enough free Space for all Party Members
+            if (team.getMaxPlayers() - team.getPlayers().size() >= players.size()) return new BedwarsRelTeamAdapter(this, team);
         }
-        return false;
+        // Return null if no Team with enough free Space was found
+        return null;
     }
 
     @Override
@@ -76,25 +78,6 @@ public class BedwarsRelAdapter implements IMinigameInstance {
             if (!mBedwars.playerJoins(player)) couldNotJoin.add(player);
         }
         return couldNotJoin;
-    }
-
-    @Override
-    public Set<Player> joinAllAsTeam(Set<Player> players) {
-        HashSet<Player> couldNotJoin = new HashSet<>();
-        // Check if a Team has enough free Space for all Party Members
-        for (Team team: mBedwars.getTeams().values()) {
-            if (team.getMaxPlayers() - team.getTeamPlayers().size() >= players.size()) {
-                for (Player player : players) {
-                    // Add the Player to the Team
-                    mBedwars.playerJoinTeam(player, team);
-                    // Check if the Player was added to the Team
-                    if (!team.getPlayers().contains(player)) couldNotJoin.add(player);
-                }
-                // Return the Players who could not join the Team
-                return couldNotJoin;
-            }
-        }
-        return players;
     }
 
     @Override

@@ -66,11 +66,6 @@ public class MobArenaAdapter implements IMinigameInstance {
     }
 
     @Override
-    public Set<Player> joinAllAsTeam(IMinigameTeam team, Set<Player> players) {
-        return joinAll(players);
-    }
-
-    @Override
     public boolean leave(Player player) {
         return mArena.playerLeave(player);
     }
