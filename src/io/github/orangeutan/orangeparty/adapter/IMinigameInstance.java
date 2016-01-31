@@ -37,11 +37,11 @@ public interface IMinigameInstance {
     Set<Player> canPlayersJoin(Set<Player> players);
 
     /**
-     * Check if all the {@link Player}s in the {@link Set} can join the Game as a Team
+     * Get a {@link IMinigameTeam} in which all the {@link Player}s in the {@link Set} can join
      * @param players The {@link Player}s to check if they can join the Game as a Team
-     * @return false if the {@link Player}s can't join as a Team
+     * @return A {@link IMinigameTeam} in which all {@link Player}s can join, or null if no {@link IMinigameTeam} with enough free Space was found
      */
-    boolean canPlayersJoinAsTeam(Set<Player> players);
+    IMinigameTeam canPlayersJoinAsTeam(Set<Player> players);
 
     /**
      * Add a {@link Player} to the Minigame
