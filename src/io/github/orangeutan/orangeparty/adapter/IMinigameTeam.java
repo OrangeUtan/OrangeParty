@@ -10,6 +10,13 @@ import java.util.Set;
 public interface IMinigameTeam {
 
     /**
+     * Check if the Team has enough free Space for the entered Amount of {@link Player}s
+     * @param playerAmount The Amount of {@link Player}
+     * @return True if the Team has enough free Space, false otherwise
+     */
+    boolean hasEnoughFreeSpaceFor(int playerAmount);
+
+    /**
      * Add a {@link Player} to the Team
      * @param player The {@link Player} who is to be added to the Team
      * @return True if the {@link Player} was added to the Team, false otherwise

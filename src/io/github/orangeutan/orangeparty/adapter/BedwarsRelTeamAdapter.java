@@ -20,6 +20,11 @@ public class BedwarsRelTeamAdapter implements IMinigameTeam {
     }
 
     @Override
+    public boolean hasEnoughFreeSpaceFor(int playerAmount) {
+        return mTeam.getMaxPlayers() - mTeam.getPlayers().size() >= playerAmount;
+    }
+
+    @Override
     public boolean addPlayer(Player player) {
         return mTeam.addPlayer(player);
     }
