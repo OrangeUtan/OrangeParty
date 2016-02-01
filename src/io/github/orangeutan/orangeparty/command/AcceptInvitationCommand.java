@@ -67,9 +67,16 @@ public class AcceptInvitationCommand implements IPartyCommand {
         }
 
         // Finally accept the Invitation
-        if (!mPartyManager.acceptInvitation(mPartyId, mExecuterId)) Utils.sendJsonMsg(executor, ERROR_ACCEPT_FAILED);
+        if (!mPartyManager.acceptInvitation(mPartyId, mExecuterId)) {
+            Utils.sendJsonMsg(executor, ERROR_ACCEPT_FAILED);
+            return false;
+        }
+
         // Add the Executor to the Party
-        if (!mPartyManager.joinParty(mPartyId, mExecuterId)) Utils.sendJsonMsg(executor, ERROR_ACCEPT_FAILED);
+        if (!mPartyManager.joinParty(mPartyId, mExecuterId)) {
+            Utils.sendJsonMsg(executor, ERROR_ACCEPT_FAILED);
+            return false;
+        }
         // Notify Executor
         Utils.sendJsonMsg(executor, String.format(MSG_YOU_JOINED_THE_PARTY, targetPartyLeader.getName()));
         // Notify the Party Members that the Executor joined their Party
