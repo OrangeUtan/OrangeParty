@@ -28,7 +28,7 @@ public interface IPartyManager {
 
     Set<UUID> getPartyMembersOf(UUID player);
 
-    boolean isOwner(UUID partyId, UUID player);
+    boolean isLeader(UUID partyId, UUID player);
 
     void broadcastMsg(UUID partyId, String msg);
 

@@ -39,7 +39,7 @@ public class Party implements IParty {
     }
 
     @Override
-    public UUID getOwner() {
+    public UUID getLeader() {
         return mLeader;
     }
 
@@ -51,7 +51,7 @@ public class Party implements IParty {
     }
 
     @Override
-    public boolean isOwner(UUID player) {
+    public boolean isLeader(UUID player) {
         return mLeader == player;
     }
 }

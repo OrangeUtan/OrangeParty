@@ -11,22 +11,22 @@ import java.util.UUID;
 /**
  * Created by Michael on 30.01.2016.
  */
-public class PartyOwnerJoinGameEvent extends Event implements Cancellable{
+public class PartyLeaderJoinGameEvent extends Event implements Cancellable{
 
     private boolean mIsCancelled = false;
     private static final HandlerList handlers = new HandlerList();
-    private Player mOwner;
+    private Player mLeader;
     private UUID mPartyId;
     private IMinigameInstance mMinigame;
 
-    public PartyOwnerJoinGameEvent(Player owner, UUID partyId, IMinigameInstance minigame) {
-        mOwner = owner;
+    public PartyLeaderJoinGameEvent(Player leader, UUID partyId, IMinigameInstance minigame) {
+        mLeader = leader;
         mPartyId = partyId;
         mMinigame = minigame;
     }
 
-    public Player getOwner() {
-        return mOwner;
+    public Player getLeader() {
+        return mLeader;
     }
 
     public UUID getPartyId() {

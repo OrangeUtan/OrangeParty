@@ -27,7 +27,7 @@ public class PartyMemberMenu extends StaticMenu {
         if (mPlayer.hasPermission(OrangeParty.PERM_TELEPORT_TO_MEMBER)) addItem(new PartyMemberTeleportItem(this, mMember));
 
         UUID party = ((OrangeParty)mPlugin).getPartyManager().inParty(mPlayer.getUniqueId());
-        if (party != null && ((OrangeParty)mPlugin).getPartyManager().isOwner(party, mPlayer.getUniqueId())) {
+        if (party != null && ((OrangeParty)mPlugin).getPartyManager().isLeader(party, mPlayer.getUniqueId())) {
             addItem(new PartyMemberKickItem(this, mMember));
         }
     }

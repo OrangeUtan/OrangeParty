@@ -25,7 +25,7 @@ public class LeavePartyCommand implements IPartyCommand {
     private static final String MSG_PLAYER_LEFT_YOUR_PARTY = new FancyMessage(OrangeParty.PREFIX + "Der Spieler")
                                                                 .then(" %s ").color(ChatColor.GOLD)
                                                                 .then("hat deine Party verlassen").toJSONString();
-    private static final String MSG_PARTY_WAS_REMOVED = new FancyMessage(OrangeParty.PREFIX + "Die Party wurde vom Owner aufgelöst").toJSONString();
+    private static final String MSG_PARTY_WAS_REMOVED = new FancyMessage(OrangeParty.PREFIX + "Die Party wurde vom Leader aufgelöst").toJSONString();
 
     public LeavePartyCommand(IPartyManager partyManager, UUID executor) {
         mPartyManager = partyManager;
@@ -52,13 +52,13 @@ public class LeavePartyCommand implements IPartyCommand {
         // Notify the Members of the Party that the Player left the Party
         mPartyManager.broadcastJsonMsg(partyId, String.format(MSG_PLAYER_LEFT_YOUR_PARTY, executor.getName()));
 
-        // If the Executor is the Owner of the Party it will get deleted
-        if (mPartyManager.isOwner(partyId, mExecutor)) {
+        // If the Executor is the Leader of the Party it will get deleted
+        if (mPartyManager.isLeader(partyId, mExecutor)) {
             // Notify the Members of the Party that the Party was removed
             mPartyManager.broadcastJsonMsg(partyId, MSG_PARTY_WAS_REMOVED);
         }
 
-        // Finally Executor leaves the Party (Party will get removed if the Executor is the Owner of teh Party)
+        // Finally Executor leaves the Party (Party will get removed if the Executor is the Leader of teh Party)
         mPartyManager.leaveParty(partyId, mExecutor);
 
         //Notify the Executor

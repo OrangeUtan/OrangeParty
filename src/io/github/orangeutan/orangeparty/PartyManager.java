@@ -16,7 +16,7 @@ import java.util.UUID;
 public class PartyManager implements IPartyManager {
 
 
-    private HashMap<UUID, Party> mParties = new HashMap<>(); // PartyId/OwnerI, Party
+    private HashMap<UUID, Party> mParties = new HashMap<>(); // PartyId/LeaderId, Party
     private HashMap<UUID, HashSet<UUID>> mPendingInvites = new HashMap<>(); // Player, Sender/PartyId
 
     public PartyManager() {
@@ -25,7 +25,7 @@ public class PartyManager implements IPartyManager {
     @Override
     public UUID inParty(UUID player) {
         for (IParty party : mParties.values()) {
-            if (party.isInParty(player)) return party.getOwner();
+            if (party.isInParty(player)) return party.getLeader();
         }
         return null;
     }
@@ -80,7 +80,7 @@ public class PartyManager implements IPartyManager {
         UUID partyId = inParty(player);
         if (partyId != null) {
             IParty party = getParty(partyId);
-            if (player == party.getOwner()) {
+            if (player == party.getLeader()) {
                 removeParty(partyId);
             } else {
                 getParty(partyId).removeMember(player);
@@ -94,7 +94,7 @@ public class PartyManager implements IPartyManager {
     public boolean leaveParty(UUID partyId, UUID member) {
         IParty party = getParty(partyId);
         if (party != null) {
-            if (party.isOwner(member)) removeParty(partyId);
+            if (party.isLeader(member)) removeParty(partyId);
             else party.removeMember(member);
             return true;
         }
@@ -112,8 +112,8 @@ public class PartyManager implements IPartyManager {
     }
 
     @Override
-    public boolean isOwner(UUID partyId, UUID player) {
-        if(partyExists(partyId)) return getParty(partyId).isOwner(player);
+    public boolean isLeader(UUID partyId, UUID player) {
+        if(partyExists(partyId)) return getParty(partyId).isLeader(player);
         return false;
     }
 

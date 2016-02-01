@@ -22,7 +22,7 @@ public class InvitePlayerCommand implements IPartyCommand {
 
     private static final String ERROR_YOU_CANT_USE_THIS_COMMAND = new FancyMessage(OrangeParty.PREFIX + "Du kannst diesen Command nicht benutzen").color(ChatColor.RED).toJSONString();
     private static final String ERROR_YOU_HAVE_TO_BE_IN_A_PARTY = new FancyMessage(OrangeParty.PREFIX + "Du musst in einer Party sein um diesen Befehl auszuführen").color(ChatColor.RED).toJSONString();
-    private static final String ERROR_YOU_HAVE_TO_BE_PARTY_OWNER = new FancyMessage(OrangeParty.PREFIX + "Du musst Owner der Party sein um diesen Command auszuführen").color(ChatColor.RED).toJSONString();
+    private static final String ERROR_YOU_HAVE_TO_BE_PARTY_LEADER = new FancyMessage(OrangeParty.PREFIX + "Du musst Leader der Party sein um diesen Command auszuführen").color(ChatColor.RED).toJSONString();
 
     private static final String MSG_INVITE_WAS_SENT = new FancyMessage(OrangeParty.PREFIX + "Einladung an")
                                                         .then(" %s ").color(ChatColor.GOLD)
@@ -58,9 +58,9 @@ public class InvitePlayerCommand implements IPartyCommand {
             return false;
         }
 
-        // Executor has to be Party Owner to execute this Command
-        if (!mPartyManager.isOwner(partyId, mExecutorId)) {
-            Utils.sendJsonMsg(executor, ERROR_YOU_HAVE_TO_BE_PARTY_OWNER);
+        // Executor has to be Party Leader to execute this Command
+        if (!mPartyManager.isLeader(partyId, mExecutorId)) {
+            Utils.sendJsonMsg(executor, ERROR_YOU_HAVE_TO_BE_PARTY_LEADER);
             return false;
         }
 

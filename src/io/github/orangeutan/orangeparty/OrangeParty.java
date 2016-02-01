@@ -22,7 +22,7 @@ public class OrangeParty extends JavaPlugin {
     public static final String PERM_ACCEPT_INVITE = "orange-party.accept";
 
     public static final String CFG_AUTOJOIN_MA_ONLY_WHEN_ENOUGH_CAPACITY = "autojoin-minigame.mobarena.only-when-enough-capacity";
-    public static final String CFG_AUTOJOIN_MA_CANCEL_OWNER_JOIN_WHEN_MEMBERS_CANT_JOIN = "autojoin-minigame.mobarena.cancel-owner-join-when-members-cant-join";
+    public static final String CFG_AUTOJOIN_MA_CANCEL_LEADER_JOIN_WHEN_MEMBERS_CANT_JOIN = "autojoin-minigame.mobarena.cancel-leader-join-when-members-cant-join";
 
     private PartyManager mPartyManager;
     private MobArena mMobArena;

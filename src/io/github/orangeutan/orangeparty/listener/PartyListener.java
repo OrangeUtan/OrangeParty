@@ -5,7 +5,7 @@ import io.github.orangeutan.orangeparty.OrangeParty;
 import io.github.orangeutan.orangeparty.adapter.BedwarsRelAdapter;
 import io.github.orangeutan.orangeparty.adapter.IMinigameTeam;
 import io.github.orangeutan.orangeparty.adapter.MobArenaAdapter;
-import io.github.orangeutan.orangeparty.events.PartyOwnerJoinGameEvent;
+import io.github.orangeutan.orangeparty.events.PartyLeaderJoinGameEvent;
 import io.github.orangeutan.orangeparty.utils.Utils;
 import io.github.yannici.bedwars.Events.BedwarsPlayerJoinEvent;
 import mkremins.fanciful.FancyMessage;
@@ -35,10 +35,10 @@ public class PartyListener implements Listener {
     private static final String ERROR_PLAYERS_CAN_NOT_FOLLOW = new FancyMessage(OrangeParty.PREFIX + "Die Partymember").color(ChatColor.RED)
                                                                     .then(" [%s] ").color(ChatColor.GOLD)
                                                                     .then("können dem Minigame nicht beitreten").color(ChatColor.RED).toJSONString();
-    private static final String ERROR_YOU_COULD_NOT_FOLLOW_THE_PARTY_OWNER = new FancyMessage(OrangeParty.PREFIX + "Du konntest dem Party Owner").color(ChatColor.RED)
+    private static final String ERROR_YOU_COULD_NOT_FOLLOW_THE_PARTY_LEADER = new FancyMessage(OrangeParty.PREFIX + "Du konntest dem Party Leader").color(ChatColor.RED)
                                                                                 .then(" %s ").color(ChatColor.GOLD)
                                                                                 .then("nicht ins Minigame folgen").color(ChatColor.RED).toJSONString();
-    private static final String ERROR_YOU_CAN_NOT_FOLLOW_THE_PARTY_OWNER = new FancyMessage(OrangeParty.PREFIX + "Du kannst dem Party Owner").color(ChatColor.RED)
+    private static final String ERROR_YOU_CAN_NOT_FOLLOW_THE_PARTY_LEADER = new FancyMessage(OrangeParty.PREFIX + "Du kannst dem Party Leader").color(ChatColor.RED)
             .then(" %s ").color(ChatColor.GOLD)
             .then(" nicht ins Minigame folgen").color(ChatColor.RED).toJSONString();
 
@@ -59,7 +59,7 @@ public class PartyListener implements Listener {
         UUID partyId = mPlugin.getPartyManager().inParty(event.getPlayer().getUniqueId());
         if (partyId != null) {
             mPlugin.getPartyManager().broadcastJsonMsg(partyId, String.format(MSG_PLAYER_LEFT_YOUR_PARTY, event.getPlayer().getName()));
-            if (mPlugin.getPartyManager().isOwner(partyId, event.getPlayer().getUniqueId())) {
+            if (mPlugin.getPartyManager().isLeader(partyId, event.getPlayer().getUniqueId())) {
                 mPlugin.getPartyManager().removeParty(event.getPlayer().getUniqueId());
                 mPlugin.getPartyManager().broadcastJsonMsg(partyId, MSG_YOUR_PARTY_WAS_CANCELED);
             } else {
@@ -74,14 +74,14 @@ public class PartyListener implements Listener {
         UUID partyId = mPlugin.getPartyManager().inParty(event.getPlayer().getUniqueId());
         // Check if the Player is in a Party
         if (partyId != null) {
-            // Player has to be Owner of the Party
-            if (mPlugin.getPartyManager().isOwner(partyId, event.getPlayer().getUniqueId())) {
-                // Call a new PartyOwnerJoinGameEvent to let the
-                PartyOwnerJoinGameEvent partyOwnerJoinGameEvent = new PartyOwnerJoinGameEvent(event.getPlayer(), partyId, new MobArenaAdapter(event.getArena()));
-                Bukkit.getServer().getPluginManager().callEvent(partyOwnerJoinGameEvent);
+            // Player has to be Leader of the Party
+            if (mPlugin.getPartyManager().isLeader(partyId, event.getPlayer().getUniqueId())) {
+                // Call a new PartyLeaderJoinGameEvent to let the
+                PartyLeaderJoinGameEvent partyLeaderJoinGameEvent = new PartyLeaderJoinGameEvent(event.getPlayer(), partyId, new MobArenaAdapter(event.getArena()));
+                Bukkit.getServer().getPluginManager().callEvent(partyLeaderJoinGameEvent);
 
-                // Cancel the Player joining the MobArena if the PartyOwnerJoinGameEvent gets cancelled and the associated Configuration is set to true
-                if (partyOwnerJoinGameEvent.isCancelled() && mPlugin.getConfig().getBoolean(OrangeParty.CFG_AUTOJOIN_MA_CANCEL_OWNER_JOIN_WHEN_MEMBERS_CANT_JOIN)) event.setCancelled(true);
+                // Cancel the Player joining the MobArena if the PartyLeaderJoinGameEvent gets cancelled and the associated Configuration is set to true
+                if (partyLeaderJoinGameEvent.isCancelled() && mPlugin.getConfig().getBoolean(OrangeParty.CFG_AUTOJOIN_MA_CANCEL_LEADER_JOIN_WHEN_MEMBERS_CANT_JOIN)) event.setCancelled(true);
             }
         }
     }
@@ -92,76 +92,76 @@ public class PartyListener implements Listener {
         UUID partyId = mPlugin.getPartyManager().inParty(event.getPlayer().getUniqueId());
         // Check if the Player is in a Party
         if (partyId != null) {
-            // Player has to be Owner of the Party
-            if (mPlugin.getPartyManager().isOwner(partyId, event.getPlayer().getUniqueId())) {
-                // Call a new PartyOwnerJoinGameEvent to let the
-                PartyOwnerJoinGameEvent partyOwnerJoinGameEvent = new PartyOwnerJoinGameEvent(event.getPlayer(), partyId, new BedwarsRelAdapter(event.getGame()));
-                Bukkit.getServer().getPluginManager().callEvent(partyOwnerJoinGameEvent);
+            // Player has to be Leader of the Party
+            if (mPlugin.getPartyManager().isLeader(partyId, event.getPlayer().getUniqueId())) {
+                // Call a new PartyLeaderJoinGameEvent to let the
+                PartyLeaderJoinGameEvent partyLeaderJoinGameEvent = new PartyLeaderJoinGameEvent(event.getPlayer(), partyId, new BedwarsRelAdapter(event.getGame()));
+                Bukkit.getServer().getPluginManager().callEvent(partyLeaderJoinGameEvent);
 
-                // Cancel the Player joining the MobArena if the PartyOwnerJoinGameEvent gets cancelled and the associated Configuration is set to true
-                if (partyOwnerJoinGameEvent.isCancelled() && mPlugin.getConfig().getBoolean(OrangeParty.CFG_AUTOJOIN_MA_CANCEL_OWNER_JOIN_WHEN_MEMBERS_CANT_JOIN)) event.setCancelled(true);
+                // Cancel the Player joining the MobArena if the PartyLeaderJoinGameEvent gets cancelled and the associated Configuration is set to true
+                if (partyLeaderJoinGameEvent.isCancelled() && mPlugin.getConfig().getBoolean(OrangeParty.CFG_AUTOJOIN_MA_CANCEL_LEADER_JOIN_WHEN_MEMBERS_CANT_JOIN)) event.setCancelled(true);
             }
         }
     }
 
     @EventHandler
-    public void onPartyOwnerJoinsGame(PartyOwnerJoinGameEvent event) {
+    public void onPartyLeaderJoinsGame(PartyLeaderJoinGameEvent event) {
 
-        // Check if the Owner can join the Minigame
-        if (!event.getMinigame().canPlayerJoin(event.getOwner())) {
+        // Check if the Leader can join the Minigame
+        if (!event.getMinigame().canPlayerJoin(event.getLeader())) {
             event.setCancelled(true);
             return;
         }
 
-        Set<Player> partyMembersMinusOwner = new HashSet<>();
-        // Get the online Party Members of the Party Owner, Owner excluded
-        for (UUID memberId : mPlugin.getPartyManager().getPartyMembersOf(event.getOwner().getUniqueId())) {
+        Set<Player> partyMembersMinusLeader = new HashSet<>();
+        // Get the online Party Members of the Party Leader, Leader excluded
+        for (UUID memberId : mPlugin.getPartyManager().getPartyMembersOf(event.getLeader().getUniqueId())) {
             OfflinePlayer offlineMember = Bukkit.getOfflinePlayer(memberId);
             // The Party Member has to be online to join the Minigame
-            if (offlineMember.isOnline()) partyMembersMinusOwner.add((Player) offlineMember);
+            if (offlineMember.isOnline()) partyMembersMinusLeader.add((Player) offlineMember);
         }
 
         // Check if all Party Members can join the Minigame
-        Set<Player> canNotJoin = event.getMinigame().canPlayersJoin(partyMembersMinusOwner);
+        Set<Player> canNotJoin = event.getMinigame().canPlayersJoin(partyMembersMinusLeader);
         // Check if some Party Members can not join the Minigame
         if (!canNotJoin.isEmpty()) {
             String canNotJoinString = StringUtils.join(Utils.getPlayerNames(canNotJoin), ",");
-            // Notify the Party Owner
-            Utils.sendJsonMsg(event.getOwner(), String.format(ERROR_PLAYERS_CAN_NOT_FOLLOW, canNotJoinString));
+            // Notify the Party Leader
+            Utils.sendJsonMsg(event.getLeader(), String.format(ERROR_PLAYERS_CAN_NOT_FOLLOW, canNotJoinString));
             // Notify the Members who can not join the Minigame
-            Utils.sendJsonMsg(canNotJoin, String.format(ERROR_YOU_CAN_NOT_FOLLOW_THE_PARTY_OWNER, event.getOwner().getName()));
-            // Cancel the Owner joning the Minigame if the Configuration is set
-            if (mPlugin.getConfig().getBoolean(OrangeParty.CFG_AUTOJOIN_MA_CANCEL_OWNER_JOIN_WHEN_MEMBERS_CANT_JOIN)) {
+            Utils.sendJsonMsg(canNotJoin, String.format(ERROR_YOU_CAN_NOT_FOLLOW_THE_PARTY_LEADER, event.getLeader().getName()));
+            // Cancel the Leader joning the Minigame if the Configuration is set
+            if (mPlugin.getConfig().getBoolean(OrangeParty.CFG_AUTOJOIN_MA_CANCEL_LEADER_JOIN_WHEN_MEMBERS_CANT_JOIN)) {
                 event.setCancelled(true);
                 return;
             }
             // Remove the Members who can not join the Minigame
-            partyMembersMinusOwner.remove(canNotJoin.toArray());
+            partyMembersMinusLeader.remove(canNotJoin.toArray());
         }
 
         Set<Player> couldNotJoin = new HashSet<>();
         // Check if the Minigame supports Teams and the Party can join as a Team
         if (event.getMinigame().hasTeams()) {
-            Set<Player> partyMembersPlusOwner = new HashSet<>(partyMembersMinusOwner);
-            partyMembersPlusOwner.add(event.getOwner());
+            Set<Player> partyMembersPlusLeader = new HashSet<>(partyMembersMinusLeader);
+            partyMembersPlusLeader.add(event.getLeader());
 
-            // Get a Team in which all Players (Plus the Party Owner) can join
-            IMinigameTeam team = event.getMinigame().canPlayersJoinAsTeam(partyMembersPlusOwner);
+            // Get a Team in which all Players (Plus the Party Leader) can join
+            IMinigameTeam team = event.getMinigame().canPlayersJoinAsTeam(partyMembersPlusLeader);
             if (team!= null) {
-                // Add all Party Members (Minus the Party Owner) to the Minigame as a Team. Save the Members who could not join the Team
-                couldNotJoin = event.getMinigame().joinAllAsTeam(team, partyMembersMinusOwner);
-                // Add the Party Owner to the team
-                team.addPlayer(event.getOwner());
+                // Add all Party Members (Minus the Party Leader) to the Minigame as a Team. Save the Members who could not join the Team
+                couldNotJoin = event.getMinigame().joinAllAsTeam(team, partyMembersMinusLeader);
+                // Add the Party Leader to the team
+                team.addPlayer(event.getLeader());
             }
         } else {
             // Add all Party Members to the Minigame. Save the Members who could not join the Minigame
-            couldNotJoin = event.getMinigame().joinAll(partyMembersMinusOwner);
+            couldNotJoin = event.getMinigame().joinAll(partyMembersMinusLeader);
         }
 
         if (!couldNotJoin.isEmpty()) {
             String couldNotJoinString = StringUtils.join(Utils.getPlayerNames(couldNotJoin), ",");
-            Utils.sendJsonMsg(event.getOwner(), String.format(ERROR_PLAYERS_COULD_NOT_FOLLOW, couldNotJoinString));
-            Utils.sendJsonMsg(couldNotJoin, String.format(ERROR_YOU_COULD_NOT_FOLLOW_THE_PARTY_OWNER, event.getOwner().getName()));
+            Utils.sendJsonMsg(event.getLeader(), String.format(ERROR_PLAYERS_COULD_NOT_FOLLOW, couldNotJoinString));
+            Utils.sendJsonMsg(couldNotJoin, String.format(ERROR_YOU_COULD_NOT_FOLLOW_THE_PARTY_LEADER, event.getLeader().getName()));
         }
     }
 }

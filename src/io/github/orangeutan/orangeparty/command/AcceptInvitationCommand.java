@@ -53,10 +53,10 @@ public class AcceptInvitationCommand implements IPartyCommand {
             return false;
         }
 
-        OfflinePlayer targetPartyOwner = Bukkit.getOfflinePlayer(mPartyId);
+        OfflinePlayer targetPartyLeader = Bukkit.getOfflinePlayer(mPartyId);
         // Executor has to be invited to the Party
         if (!mPartyManager.isInvitedToParty(mPartyId, mExecuterId)) {
-            Utils.sendJsonMsg(executor, String.format(ERROR_NOT_INVITED_TO_PARTY, targetPartyOwner.getName()));
+            Utils.sendJsonMsg(executor, String.format(ERROR_NOT_INVITED_TO_PARTY, targetPartyLeader.getName()));
             return false;
         }
 
@@ -71,7 +71,7 @@ public class AcceptInvitationCommand implements IPartyCommand {
         // Add the Executor to the Party
         if (!mPartyManager.joinParty(mPartyId, mExecuterId)) Utils.sendJsonMsg(executor, ERROR_ACCEPT_FAILED);
         // Notify Executor
-        Utils.sendJsonMsg(executor, String.format(MSG_YOU_JOINED_THE_PARTY, targetPartyOwner.getName()));
+        Utils.sendJsonMsg(executor, String.format(MSG_YOU_JOINED_THE_PARTY, targetPartyLeader.getName()));
         // Notify the Party Members that the Executor joined their Party
         mPartyManager.broadcastJsonMsg(mPartyId, String.format(MSG_PLAYER_JOINED_YOUR_PARTY, executor.getName()));
         return true;

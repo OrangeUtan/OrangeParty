@@ -19,9 +19,9 @@ public interface IParty {
 
     boolean isInParty(UUID player);
 
-    UUID getOwner();
+    UUID getLeader();
 
     Set<UUID> getMembers();
 
-    boolean isOwner(UUID player);
+    boolean isLeader(UUID player);
 }
