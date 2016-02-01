@@ -1,8 +1,8 @@
 package io.github.orangeutan.orangeparty.menus.item;
 
-import io.github.orangeutan.orangeitemmenu.events.ItemClickEvent;
-import io.github.orangeutan.orangeitemmenu.items.StaticItem;
-import io.github.orangeutan.orangeitemmenu.menus.IItemMenu;
+import io.github.orangeutan.orangecore.gui.events.ItemClickEvent;
+import io.github.orangeutan.orangecore.gui.items.StaticItem;
+import io.github.orangeutan.orangecore.gui.menus.IItemMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

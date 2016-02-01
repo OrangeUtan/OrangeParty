@@ -1,7 +1,8 @@
 package io.github.orangeutan.orangeparty.menus;
 
-import io.github.orangeutan.orangeitemmenu.items.CloseItem;
-import io.github.orangeutan.orangeitemmenu.menus.StaticMenu;
+import io.github.orangeutan.orangecore.gui.items.CloseItem;
+import io.github.orangeutan.orangecore.gui.menus.IItemMenu;
+import io.github.orangeutan.orangecore.gui.menus.StaticMenu;
 import io.github.orangeutan.orangeparty.OrangeParty;
 import io.github.orangeutan.orangeparty.menus.item.PartyMemberItem;
 import io.github.orangeutan.orangeparty.PartyManager;
@@ -20,7 +21,7 @@ import java.util.UUID;
 public class PartyMenu extends StaticMenu {
 
     public PartyMenu(Plugin plugin, Player player) {
-        super(plugin, player, Size.FOUR_LINE, "Deine Party", null);
+        super(plugin, player, IItemMenu.Size.FOUR_LINE, "Deine Party", null);
 
         setItem(0, new CloseItem(this, "Schließen", new ItemStack(Material.BARRIER)));
 
