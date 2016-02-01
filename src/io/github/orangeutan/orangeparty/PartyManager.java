@@ -16,7 +16,7 @@ import java.util.UUID;
 public class PartyManager implements IPartyManager {
 
 
-    private HashMap<UUID, Party> mParties = new HashMap<>(); // PartyId/LeaderId, Party
+    private HashMap<UUID, IParty> mParties = new HashMap<>(); // PartyId/LeaderId, Party
     private HashMap<UUID, HashSet<UUID>> mPendingInvites = new HashMap<>(); // Player, Sender/PartyId
 
     public PartyManager() {
@@ -119,7 +119,7 @@ public class PartyManager implements IPartyManager {
 
     @Override
     public void broadcastMsg(UUID partyId, String msg) {
-        Party party = mParties.get(partyId);
+        IParty party = mParties.get(partyId);
         if (party != null) {
             for (UUID partyMember : party.getMembers()) {
                 OfflinePlayer member = Bukkit.getOfflinePlayer(partyMember);
@@ -130,7 +130,7 @@ public class PartyManager implements IPartyManager {
 
     @Override
     public void broadcastJsonMsg(UUID partyId, String msg) {
-        Party party = mParties.get(partyId);
+        IParty party = mParties.get(partyId);
         if (party != null) {
             for (UUID partyMember : party.getMembers()) {
                 OfflinePlayer member = Bukkit.getOfflinePlayer(partyMember);
