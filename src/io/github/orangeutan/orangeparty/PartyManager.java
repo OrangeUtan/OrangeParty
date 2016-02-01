@@ -70,7 +70,7 @@ public class PartyManager implements IPartyManager {
             for (IParty party : mParties.values()) {
                 if (party.isInParty(player)) return false;
             }
-            mParties.get(partyId).addMember(player);
+            return mParties.get(partyId).addMember(player);
         }
         return false;
     }
