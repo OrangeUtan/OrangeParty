@@ -167,4 +167,20 @@ public class PartyManager implements IPartyManager {
         }
         return false;
     }
+
+    /**
+     * Remove all Invites to a Party
+     * @param partyId The Id of the Party whose Invites to remove
+     * @return True if all Invites were removed, false if there were no Invites
+     */
+    public boolean removeAllInvitesFrom(UUID partyId) {
+        for (UUID player : mPendingInvites.keySet()) {
+            if (mPendingInvites.get(player).contains(partyId)) {
+                mPendingInvites.get(player).remove(partyId);
+                if (mPendingInvites.get(player).isEmpty()) mPendingInvites.remove(player);
+                return true;
+            }
+        }
+        return false;
+    }
 }
