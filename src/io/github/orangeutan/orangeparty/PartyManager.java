@@ -49,6 +49,7 @@ public class PartyManager implements IPartyManager {
 
     @Override
     public boolean removeParty(UUID partyId) {
+        removeAllInvitesFrom(partyId);
         return mParties.remove(partyId) != null;
     }
 
