@@ -163,7 +163,7 @@ public class PartyManager implements IPartyManager {
     public boolean acceptInvitation(UUID partyId, UUID player) {
         if (isInvitedToParty(partyId, player)) {
             // Remove the Player from the PendingInvites
-            mPendingInvites.remove(player);
+            return mPendingInvites.remove(player) != null;
         }
         return false;
     }
