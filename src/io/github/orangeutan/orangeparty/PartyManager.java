@@ -40,7 +40,7 @@ public class PartyManager implements IPartyManager {
     @Override
     public boolean createParty(UUID leader) {
         if (!mParties.keySet().contains(leader)) {
-            Party party = new Party(leader, IParty.DEFAULT_CAPACITY);
+            IParty party = new Party(leader, IParty.DEFAULT_CAPACITY);
             mParties.put(leader, party);
             return true;
         }
